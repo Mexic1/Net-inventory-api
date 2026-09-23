@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" font-family="Inter, 'DejaVu Sans', 'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowLight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="540" fill="#ffffff"/>
+
+  <!-- compose group -->
+  <rect x="32" y="56" width="580" height="336" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="52" y="84" font-size="15" font-weight="600" fill="#64748b">docker compose</text>
+
+  <!-- api -->
+  <rect x="64" y="104" width="228" height="96" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="178" y="136" text-anchor="middle" font-size="19" font-weight="700" fill="#0c4a6e">api</text>
+  <text x="178" y="160" text-anchor="middle" font-size="14" fill="#075985">FastAPI · uvicorn</text>
+  <text x="178" y="182" text-anchor="middle" font-size="13" fill="#0369a1">non-root · 120 MB · :8000</text>
+
+  <!-- db -->
+  <rect x="356" y="104" width="228" height="96" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="470" y="136" text-anchor="middle" font-size="19" font-weight="700" fill="#4c1d95">db</text>
+  <text x="470" y="160" text-anchor="middle" font-size="14" fill="#5b21b6">PostgreSQL 17</text>
+  <text x="470" y="182" text-anchor="middle" font-size="13" fill="#6d28d9">healthcheck-gated</text>
+
+  <!-- adminer -->
+  <rect x="64" y="272" width="228" height="80" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="178" y="302" text-anchor="middle" font-size="17" font-weight="700" fill="#334155">adminer</text>
+  <text x="178" y="326" text-anchor="middle" font-size="13" fill="#475569">:8080 · DB browsing</text>
+
+  <!-- volume -->
+  <rect x="356" y="272" width="228" height="80" rx="10" fill="#fefce8" stroke="#ca8a04" stroke-width="2"/>
+  <text x="470" y="302" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12">pgdata</text>
+  <text x="470" y="326" text-anchor="middle" font-size="13" fill="#854d0e">named volume · survives down</text>
+
+  <!-- arrows inside compose -->
+  <line x1="292" y1="152" x2="350" y2="152" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="321" y="142" text-anchor="middle" font-size="11" fill="#475569">DATABASE_URL</text>
+  <line x1="470" y1="200" x2="470" y2="266" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="292" y1="312" x2="350" y2="312" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- CI -->
+  <rect x="668" y="56" width="300" height="180" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="818" y="88" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d">GitHub Actions</text>
+  <text x="818" y="118" text-anchor="middle" font-size="13" fill="#166534">ruff  →  pytest (Postgres service)</text>
+  <text x="818" y="142" text-anchor="middle" font-size="13" fill="#166534">Trivy fs  →  build  →  Trivy image</text>
+  <text x="818" y="172" text-anchor="middle" font-size="12" fill="#15803d">scan gates the push</text>
+  <text x="818" y="204" text-anchor="middle" font-size="12" fill="#15803d">main only</text>
+
+  <!-- GHCR -->
+  <rect x="668" y="272" width="300" height="80" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="818" y="302" text-anchor="middle" font-size="17" font-weight="700" fill="#7c2d12">GHCR</text>
+  <text x="818" y="326" text-anchor="middle" font-size="12" fill="#9a3412">ghcr.io/mexic1/net-inventory-api</text>
+
+  <line x1="818" y1="236" x2="818" y2="266" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 668 312 L 642 312 L 642 232 L 618 232" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowLight)"/>
+  <text x="658" y="276" text-anchor="middle" font-size="11" fill="#64748b" transform="rotate(-90 658 276)">api image</text>
+
+  <!-- N1 downstream -->
+  <rect x="64" y="440" width="420" height="72" rx="10" fill="#ffffff" stroke="#475569" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="274" y="468" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">N1 · Nornir config backup + drift detection</text>
+  <text x="274" y="492" text-anchor="middle" font-size="12" fill="#475569">consumes the inventory as hosts.yaml, no hand-editing</text>
+
+  <path d="M 178 200 L 178 236 L 26 236 L 26 476 L 58 476" fill="none" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="196" y="228" font-size="12" font-weight="600" fill="#0369a1">GET /export/nornir</text>
+</svg>
