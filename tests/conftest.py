@@ -13,8 +13,11 @@ import os
 
 import pytest
 
+# Port 5433, not 5432: the suite drops and recreates tables, so it must never
+# point at the compose stack's database. `make test-db` starts a throwaway
+# container there; CI overrides this with its own service container.
 os.environ.setdefault(
-    "DATABASE_URL", "postgresql+psycopg://postgres:test@localhost:5432/test"
+    "DATABASE_URL", "postgresql+psycopg://postgres:test@127.0.0.1:5433/test"
 )
 
 from fastapi.testclient import TestClient  # noqa: E402

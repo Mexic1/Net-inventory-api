@@ -5,7 +5,7 @@ DOCKER := $(shell command -v omarchy-sudo-docker >/dev/null 2>&1 && omarchy-sudo
 PY     := .venv/bin/python
 BIN    := .venv/bin
 
-.PHONY: venv lock lint test up down clean logs build sudo-keepalive
+.PHONY: venv lock lint test test-db test-db-stop up down clean logs build sudo-keepalive
 
 venv:            ## create .venv on Python 3.12 and install dev deps
 	uv venv --python 3.12
@@ -17,7 +17,15 @@ lock:            ## refresh requirements.lock (exact pins used by the image)
 lint:
 	$(BIN)/ruff check .
 
-test:
+test-db:         ## throwaway Postgres for the suite, on 5433 so it cannot hit dev data
+	$(DOCKER) run -d --rm --name netinv-test-pg \
+		-e POSTGRES_PASSWORD=test -e POSTGRES_DB=test \
+		-p 127.0.0.1:5433:5432 postgres:17
+
+test-db-stop:
+	$(DOCKER) rm -f netinv-test-pg
+
+test:            ## needs `make test-db` running first
 	$(BIN)/pytest -q
 
 sudo-keepalive:  ## prompt once, keep sudo warm for a batch of docker commands

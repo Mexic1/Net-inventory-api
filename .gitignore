@@ -8,3 +8,6 @@ docs/*.png.tmp
 
 # uv project-mode lock is misleading here: deps live in requirements*.txt
 uv.lock
+
+# scanner scratch dir, generated in CI
+.trivy/

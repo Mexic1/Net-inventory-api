@@ -1,4 +1,9 @@
 -r requirements.txt
+# The image compiles psycopg[c]; tests use the prebuilt wheel instead, so a
+# CI runner or a dev machine never depends on a system libpq being
+# discoverable via ctypes.util.find_library (which is what broke the Alpine
+# image in phase 3).
+psycopg[binary]>=3.2,<4.0
 pytest>=8.3,<9.0
 httpx2>=2.13,<3.0
 ruff>=0.8
