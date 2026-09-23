@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+docs/*.png.tmp
+
+# uv project-mode lock is misleading here: deps live in requirements*.txt
+uv.lock
