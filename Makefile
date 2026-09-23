@@ -5,7 +5,7 @@ DOCKER := $(shell command -v omarchy-sudo-docker >/dev/null 2>&1 && omarchy-sudo
 PY     := .venv/bin/python
 BIN    := .venv/bin
 
-.PHONY: venv lock lint test up down logs build sudo-keepalive
+.PHONY: venv lock lint test up down clean logs build sudo-keepalive
 
 venv:            ## create .venv on Python 3.12 and install dev deps
 	uv venv --python 3.12
@@ -26,7 +26,10 @@ sudo-keepalive:  ## prompt once, keep sudo warm for a batch of docker commands
 up:
 	$(DOCKER) compose up --build -d
 
-down:
+down:            ## stop the stack, keep the inventory in the pgdata volume
+	$(DOCKER) compose down
+
+clean:           ## stop the stack AND discard the database volume
 	$(DOCKER) compose down -v
 
 logs:
