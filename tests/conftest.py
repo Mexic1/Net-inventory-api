@@ -28,6 +28,10 @@ from app.main import app  # noqa: E402
 @pytest.fixture(scope="session")
 def engine():
     eng = create_engine(os.environ["DATABASE_URL"], pool_pre_ping=True)
+    # Drop first: the suite asserts on exact inventory contents, so it must not
+    # inherit rows left behind by a previous run, a dev session or a container
+    # pointed at the same database.
+    Base.metadata.drop_all(eng)
     Base.metadata.create_all(eng)
     yield eng
     Base.metadata.drop_all(eng)
