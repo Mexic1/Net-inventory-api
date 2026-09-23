@@ -13,3 +13,5 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# The app is imported as a top-level package from the repo root.
+pythonpath = ["."]
